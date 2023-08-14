@@ -1,3 +1,4 @@
+import { Exclude } from 'class-transformer';
 import {
   Column,
   DeleteDateColumn,
@@ -16,11 +17,12 @@ export class User {
   @Column({ unique: true, nullable: false })
   email: string;
 
+  @Exclude()
   @Column({ nullable: false })
   password: string;
 
   @Column({ default: 'user' })
-  rol: string;
+  role: string;
 
   @DeleteDateColumn()
   deletedAt: Date;
