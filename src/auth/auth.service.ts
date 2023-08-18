@@ -3,12 +3,13 @@ import {
   Injectable,
   UnauthorizedException,
 } from '@nestjs/common';
-import { UsersService } from 'src/users/users.service';
+import { UsersService } from '../users/users.service';
 import { RegisterDto } from './dto/register.dto';
 
 import * as bcryptjs from 'bcryptjs';
 import { LoginDto } from './dto/login.dto';
 import { JwtService } from '@nestjs/jwt';
+import { ActiveUserInterface } from '../common/interfaces/active-user.interface';
 
 @Injectable()
 export class AuthService {
@@ -30,7 +31,7 @@ export class AuthService {
   }
 
   async login({ email, password }: LoginDto) {
-    const user = await this.usersService.findOneByEmail(email);
+    const user = await this.usersService.findOneByEmailWithPassword(email);
 
     if (!user) {
       throw new UnauthorizedException('email is wrong');
@@ -49,7 +50,7 @@ export class AuthService {
     return { token, email };
   }
 
-  async profile({ email, role }: { email: string; role: string }) {
+  async profile({ email, role }: ActiveUserInterface) {
     return await this.usersService.findOneByEmail(email);
   }
 }

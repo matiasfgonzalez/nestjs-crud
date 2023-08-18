@@ -1,4 +1,4 @@
-import { Cat } from 'src/cats/entities/cat.entity';
+import { Cat } from '../../cats/entities/cat.entity';
 import { Column, Entity, OneToMany } from 'typeorm';
 
 @Entity()
