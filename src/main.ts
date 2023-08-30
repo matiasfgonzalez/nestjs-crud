@@ -16,6 +16,8 @@ async function bootstrap() {
     }),
   );
 
+  app.enableCors();
+
   const config = new DocumentBuilder()
     .setTitle('Documentación')
     .setDescription('Descripción de la API')
